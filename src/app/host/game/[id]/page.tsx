@@ -126,18 +126,20 @@ export default function Home({
   const [currentQuestionSequence, setCurrentQuestionSequence] = useState(0)
 
   return (
-    <main className="bg-green-600 min-h-screen">
+    <main className="bg-[#181818] min-h-screen">
       {currentScreen == AdminScreens.lobby && (
         <Lobby participants={participants} gameId={gameId}></Lobby>
       )}
-      {currentScreen == AdminScreens.quiz && (
-        <Quiz
-          question={quizSet!.questions![currentQuestionSequence]}
-          questionCount={quizSet!.questions!.length}
-          gameId={gameId}
-          participants={participants}
-        ></Quiz>
-      )}
+      {currentScreen == AdminScreens.quiz &&
+        quizSet?.questions?.[currentQuestionSequence] && (
+          <Quiz
+            question={quizSet.questions[currentQuestionSequence]}
+            questionCount={quizSet.questions.length}
+            gameId={gameId}
+            participants={participants}
+            currentQuestionSequence={currentQuestionSequence}
+          ></Quiz>
+        )}
       {currentScreen == AdminScreens.result && (
         <Results
           participants={participants!}

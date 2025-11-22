@@ -101,21 +101,25 @@ export default function Home({
   }, [gameId])
 
   return (
-    <main className="bg-green-500 min-h-screen">
+    <main className="bg-[#181818] min-h-screen">
       {currentScreen == Screens.lobby && (
         <Lobby
           onRegisterCompleted={onRegisterCompleted}
           gameId={gameId}
         ></Lobby>
       )}
-      {currentScreen == Screens.quiz && questions && (
-        <Quiz
-          question={questions![currentQuestionSequence]}
-          questionCount={questions!.length}
-          participantId={participant!.id}
-          isAnswerRevealed={isAnswerRevealed}
-        ></Quiz>
-      )}
+      {currentScreen == Screens.quiz &&
+        questions &&
+        questions[currentQuestionSequence] && (
+          <Quiz
+            key={questions[currentQuestionSequence].id}
+            question={questions[currentQuestionSequence]}
+            questionCount={questions.length}
+            participantId={participant!.id}
+            currentQuestionSequence={currentQuestionSequence}
+            isAnswerRevealed={isAnswerRevealed}
+          ></Quiz>
+        )}
       {currentScreen == Screens.results && (
         <Results participant={participant!}></Results>
       )}

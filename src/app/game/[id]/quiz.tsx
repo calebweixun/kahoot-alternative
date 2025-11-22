@@ -8,11 +8,13 @@ export default function Quiz({
   questionCount: questionCount,
   participantId: playerId,
   isAnswerRevealed,
+  currentQuestionSequence,
 }: {
   question: Question
   questionCount: number
   participantId: string
   isAnswerRevealed: boolean
+  currentQuestionSequence: number
 }) {
   const [chosenChoice, setChosenChoice] = useState<Choice | null>(null)
 
@@ -32,12 +34,12 @@ export default function Quiz({
     const score = !choice.is_correct
       ? 0
       : 1000 -
-        Math.round(
-          Math.max(
-            0,
-            Math.min((now - questionStartTime) / QUESTION_ANSWER_TIME, 1)
-          ) * 1000
-        )
+      Math.round(
+        Math.max(
+          0,
+          Math.min((now - questionStartTime) / QUESTION_ANSWER_TIME, 1)
+        ) * 1000
+      )
 
     const { error } = await supabase.from('answers').insert({
       participant_id: playerId,
@@ -54,7 +56,7 @@ export default function Quiz({
   return (
     <div className="h-screen flex flex-col items-stretch bg-slate-900 relative">
       <div className="text-center">
-        <h2 className="pb-4 text-2xl bg-white font-bold mx-4 my-12 p-4 rounded inline-block md:text-3xl md:px-24">
+        <h2 className="pb-4 text-2xl bg-white text-black font-bold mx-4 my-12 p-4 rounded inline-block md:text-3xl md:px-24">
           {question.body}
         </h2>
       </div>
@@ -95,15 +97,14 @@ export default function Quiz({
                   onClick={() => answer(choice)}
                   disabled={chosenChoice !== null || isAnswerRevealed}
                   className={`px-4 py-6 w-full text-xl rounded text-white flex justify-between md:text-2xl md:font-bold
-              ${
-                index === 0
-                  ? 'bg-red-500'
-                  : index === 1
-                  ? 'bg-blue-500'
-                  : index === 2
-                  ? 'bg-yellow-500'
-                  : 'bg-green-500'
-              }
+              ${index === 0
+                      ? 'bg-red-500'
+                      : index === 1
+                        ? 'bg-blue-500'
+                        : index === 2
+                          ? 'bg-yellow-500'
+                          : 'bg-green-500'
+                    }
               ${isAnswerRevealed && !choice.is_correct ? 'opacity-60' : ''}
              `}
                 >
@@ -157,9 +158,8 @@ export default function Quiz({
             {chosenChoice?.is_correct ? 'Correct' : 'Incorrect'}
           </h2>
           <div
-            className={`text-white rounded-full p-4  ${
-              chosenChoice?.is_correct ? 'bg-green-500' : 'bg-red-500'
-            }`}
+            className={`text-white rounded-full p-4  ${chosenChoice?.is_correct ? 'bg-green-500' : 'bg-red-500'
+              }`}
           >
             {chosenChoice?.is_correct && (
               <svg
@@ -199,7 +199,7 @@ export default function Quiz({
 
       <div className="flex text-white py-2 px-4 items-center bg-black">
         <div className="text-2xl">
-          {question.order + 1}/{questionCount}
+          {currentQuestionSequence + 1}/{questionCount}
         </div>
       </div>
     </div>

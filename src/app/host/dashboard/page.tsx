@@ -26,7 +26,14 @@ export default function Home() {
       await supabase.auth.getSession()
 
     if (!sessionData.session) {
-      await supabase.auth.signInAnonymously()
+      const { error: authError } = await supabase.auth.signInAnonymously()
+      if (authError) {
+        console.error('Anonymous sign-in failed:', authError)
+        alert(
+          'Failed to sign in anonymously. Please enable Anonymous Sign-ins in Supabase Dashboard > Authentication > Providers.'
+        )
+        return
+      }
     }
 
     const { data, error } = await supabase
@@ -51,16 +58,16 @@ export default function Home() {
       {quizSet.map((quizSet) => (
         <div
           key={quizSet.id}
-          className="flex justify-start shadow my-4 mx-2 rounded"
+          className="flex justify-start bg-[#252525] shadow-lg my-4 mx-2 rounded-lg border border-gray-800 overflow-hidden transition-transform hover:scale-[1.01]"
         >
-          <img className="h-28" src="/default.png" alt="default quiz image" />
-          <div className="p-2 flex flex-col justify-between items-stretch flex-grow">
-            <h2 className="font-bold">{quizSet.name}</h2>
-            <div className="flex justify-between items-end">
-              <div>{quizSet.questions.length} questions</div>
+          <img className="h-32 w-32 object-cover" src="/default.png" alt="default quiz image" />
+          <div className="p-4 flex flex-col justify-between items-stretch flex-grow">
+            <h2 className="font-bold text-xl text-white">{quizSet.name}</h2>
+            <div className="flex justify-between items-end mt-2">
+              <div className="text-gray-400">{quizSet.questions.length} questions</div>
               <div>
                 <button
-                  className="bg-green-500 text-white py-1 px-4 rounded"
+                  className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-full font-semibold transition-colors shadow-md"
                   onClick={() => startGame(quizSet.id)}
                 >
                   Start Game

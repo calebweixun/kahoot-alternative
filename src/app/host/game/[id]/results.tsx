@@ -41,7 +41,7 @@ export default function Results({
   return (
     <div className="min-h-screen bg-black">
       <div className="text-center">
-        <h1 className="text-3xl my-4 py-4 px-12 bg-white inline-block rounded font-bold">
+        <h1 className="text-3xl my-4 py-4 px-12 bg-white text-black inline-block rounded font-bold">
           {quizSet.name}
         </h1>
       </div>
@@ -50,17 +50,15 @@ export default function Results({
           {gameResults.map((gameResult, index) => (
             <div
               key={gameResult.participant_id}
-              className={`flex justify-between items-center bg-white py-2 px-4 rounded my-4 max-w-2xl w-full ${
-                index < 3 ? 'shadow-xl font-bold' : ''
-              }`}
+              className={`flex justify-between items-center bg-white text-black py-2 px-4 rounded my-4 max-w-2xl w-full ${index < 3 ? 'shadow-xl font-bold' : ''
+                }`}
             >
               <div className={`pr-4 ${index < 3 ? 'text-3xl' : 'text-l'}`}>
                 {index + 1}
               </div>
               <div
-                className={`flex-grow font-bold ${
-                  index < 3 ? 'text-5xl' : 'text-2xl'
-                }`}
+                className={`flex-grow font-bold ${index < 3 ? 'text-5xl' : 'text-2xl'
+                  }`}
               >
                 {gameResult.nickname}
               </div>

@@ -51,7 +51,7 @@ export default function Lobby({
   }, [gameId, onRegisterCompleted])
 
   return (
-    <div className="bg-green-500 flex justify-center items-center min-h-screen">
+    <div className="bg-[#181818] flex justify-center items-center min-h-screen">
       <div className="bg-black p-12">
         {!participant && (
           <Register
@@ -119,7 +119,7 @@ function Register({
         placeholder="Nickname"
         maxLength={20}
       />
-      <button disabled={sending} className="w-full py-2 bg-green-500 mt-4">
+      <button disabled={sending} className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded mt-4 transition-colors">
         Join
       </button>
     </form>

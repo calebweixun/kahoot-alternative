@@ -8,11 +8,13 @@ export default function Quiz({
   questionCount: questionCount,
   gameId,
   participants,
+  currentQuestionSequence,
 }: {
   question: Question
   questionCount: number
   gameId: string
   participants: Participant[]
+  currentQuestionSequence: number
 }) {
   const [isAnswerRevealed, setIsAnswerRevealed] = useState(false)
 
@@ -26,11 +28,11 @@ export default function Quiz({
 
   const getNextQuestion = async () => {
     var updateData
-    if (questionCount == question.order + 1) {
+    if (questionCount == currentQuestionSequence + 1) {
       updateData = { phase: 'result' }
     } else {
       updateData = {
-        current_question_sequence: question.order + 1,
+        current_question_sequence: currentQuestionSequence + 1,
         is_answer_revealed: false,
       }
     }
@@ -107,7 +109,7 @@ export default function Quiz({
       </div>
 
       <div className="text-center">
-        <h2 className="pb-4 text-3xl bg-white font-bold mx-24 my-12 p-4 rounded inline-block">
+        <h2 className="pb-4 text-3xl bg-white text-black font-bold mx-24 my-12 p-4 rounded inline-block">
           {question.body}
         </h2>
       </div>
@@ -144,35 +146,32 @@ export default function Quiz({
                 <div className="flex-grow relative">
                   <div
                     style={{
-                      height: `${
-                        (answers.filter(
-                          (answer) => answer.choice_id === choice.id
-                        ).length *
-                          100) /
+                      height: `${(answers.filter(
+                        (answer) => answer.choice_id === choice.id
+                      ).length *
+                        100) /
                         (answers.length || 1)
-                      }%`,
+                        }%`,
                     }}
-                    className={`absolute bottom-0 left-0 right-0 mb-1 rounded-t ${
-                      index === 0
-                        ? 'bg-red-500'
-                        : index === 1
+                    className={`absolute bottom-0 left-0 right-0 mb-1 rounded-t ${index === 0
+                      ? 'bg-red-500'
+                      : index === 1
                         ? 'bg-blue-500'
                         : index === 2
-                        ? 'bg-yellow-500'
-                        : 'bg-green-500'
-                    }`}
+                          ? 'bg-yellow-500'
+                          : 'bg-green-500'
+                      }`}
                   ></div>
                 </div>
                 <div
-                  className={`mt-1 text-white text-lg text-center py-2 rounded-b ${
-                    index === 0
-                      ? 'bg-red-500'
-                      : index === 1
+                  className={`mt-1 text-white text-lg text-center py-2 rounded-b ${index === 0
+                    ? 'bg-red-500'
+                    : index === 1
                       ? 'bg-blue-500'
                       : index === 2
-                      ? 'bg-yellow-500'
-                      : 'bg-green-500'
-                  }`}
+                        ? 'bg-yellow-500'
+                        : 'bg-green-500'
+                    }`}
                 >
                   {
                     answers.filter((answer) => answer.choice_id === choice.id)
@@ -191,15 +190,14 @@ export default function Quiz({
             <div key={choice.id} className="w-1/2 p-1">
               <div
                 className={`px-4 py-6 w-full text-2xl rounded font-bold text-white flex justify-between
-                ${
-                  index === 0
+                ${index === 0
                     ? 'bg-red-500'
                     : index === 1
-                    ? 'bg-blue-500'
-                    : index === 2
-                    ? 'bg-yellow-500'
-                    : 'bg-green-500'
-                }
+                      ? 'bg-blue-500'
+                      : index === 2
+                        ? 'bg-yellow-500'
+                        : 'bg-green-500'
+                  }
                 ${isAnswerRevealed && !choice.is_correct ? 'opacity-60' : ''}
                `}
               >
@@ -248,7 +246,7 @@ export default function Quiz({
 
       <div className="flex text-white py-2 px-4 items-center bg-black">
         <div className="text-2xl">
-          {question.order + 1}/{questionCount}
+          {currentQuestionSequence + 1}/{questionCount}
         </div>
       </div>
     </div>

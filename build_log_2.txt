@@ -1,0 +1,129 @@
+#0 building with "orbstack" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.96kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:20-alpine
+#2 DONE 0.9s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 137B done
+#3 DONE 0.0s
+
+#4 [base 1/1] FROM docker.io/library/node:20-alpine@sha256:6178e78b972f79c335df281f4b7674a2d85071aae2af020ffa39f0a770265435
+#4 DONE 0.0s
+
+#5 [builder 1/4] WORKDIR /app
+#5 CACHED
+
+#6 [runner 2/8] RUN addgroup --system --gid 1001 nodejs
+#6 CACHED
+
+#7 [runner 3/8] RUN adduser --system --uid 1001 nextjs
+#7 CACHED
+
+#8 [internal] load build context
+#8 transferring context: 42.14kB done
+#8 DONE 0.0s
+
+#9 [deps 4/4] RUN   if [ -f package-lock.json ]; then npm ci;   else echo "Lockfile not found." && exit 1;   fi
+#9 CACHED
+
+#10 [deps 3/4] COPY package.json package-lock.json* ./
+#10 CACHED
+
+#11 [deps 1/4] RUN apk add --no-cache libc6-compat
+#11 CACHED
+
+#12 [deps 2/4] WORKDIR /app
+#12 CACHED
+
+#13 [builder 2/4] COPY --from=deps /app/node_modules ./node_modules
+#13 CACHED
+
+#14 [builder 3/4] COPY . .
+#14 DONE 0.0s
+
+#15 [builder 4/4] RUN npm run build
+#15 0.202 
+#15 0.202 > kahoot-alternative@0.1.0 build
+#15 0.202 > next build
+#15 0.202 
+#15 0.454 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#15 0.454 This information is used to shape Next.js' roadmap and prioritize features.
+#15 0.454 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#15 0.454 https://nextjs.org/telemetry
+#15 0.454 
+#15 0.489   ▲ Next.js 14.2.15
+#15 0.489 
+#15 0.525    Creating an optimized production build ...
+#15 3.654 Browserslist: browsers data (caniuse-lite) is 11 months old. Please run:
+#15 3.654   npx update-browserslist-db@latest
+#15 3.654   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#15 4.888 Browserslist: caniuse-lite is outdated. Please run:
+#15 4.888   npx update-browserslist-db@latest
+#15 4.888   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#15 5.465  ✓ Compiled successfully
+#15 5.466    Linting and checking validity of types ...
+#15 6.213 
+#15 6.213 ./src/app/host/dashboard/page.tsx
+#15 6.213 56:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+#15 6.213 
+#15 6.213 ./src/app/host/game/[id]/quiz.tsx
+#15 6.213 94:6  Warning: React Hook useEffect has missing dependencies: 'onTimeUp' and 'participants.length'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+#15 6.213 
+#15 6.213 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+#15 6.978    Collecting page data ...
+#15 7.422    Generating static pages (0/8) ...
+#15 7.574    Generating static pages (2/8) 
+#15 7.574    Generating static pages (4/8) 
+#15 7.574    Generating static pages (6/8) 
+#15 7.602  ✓ Generating static pages (8/8)
+#15 7.703    Finalizing page optimization ...
+#15 7.703    Collecting build traces ...
+#15 14.82 
+#15 14.83 Route (app)                              Size     First Load JS
+#15 14.83 ┌ ○ /                                    336 B          87.6 kB
+#15 14.83 ├ ○ /_not-found                          873 B          88.1 kB
+#15 14.83 ├ ƒ /game/[id]                           4.05 kB         117 kB
+#15 14.83 ├ ○ /host                                261 B          87.5 kB
+#15 14.83 ├ ○ /host/dashboard                      878 B           113 kB
+#15 14.83 ├ ○ /host/dashboard/how-to               138 B          87.4 kB
+#15 14.83 └ ƒ /host/game/[id]                      22.1 kB         135 kB
+#15 14.83 + First Load JS shared by all            87.2 kB
+#15 14.83   ├ chunks/117-f1440ad76292f941.js       31.6 kB
+#15 14.83   ├ chunks/fd9d1056-13baa9b2029d31fe.js  53.6 kB
+#15 14.83   └ other shared chunks (total)          2 kB
+#15 14.83 
+#15 14.83 
+#15 14.83 ○  (Static)   prerendered as static content
+#15 14.83 ƒ  (Dynamic)  server-rendered on demand
+#15 14.83 
+#15 14.84 npm notice
+#15 14.84 npm notice New major version of npm available! 10.8.2 -> 11.6.3
+#15 14.84 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.3
+#15 14.84 npm notice To update run: npm install -g npm@11.6.3
+#15 14.84 npm notice
+#15 DONE 14.9s
+
+#16 [runner 4/8] COPY --from=builder /app/public ./public
+#16 DONE 0.1s
+
+#17 [runner 5/8] RUN mkdir .next
+#17 DONE 0.1s
+
+#18 [runner 6/8] RUN chown nextjs:nodejs .next
+#18 DONE 0.1s
+
+#19 [runner 7/8] COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+#19 DONE 0.1s
+
+#20 [runner 8/8] COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+#20 DONE 0.0s
+
+#21 exporting to image
+#21 exporting layers 0.1s done
+#21 writing image sha256:016d9334e8d8391cdad6137ef8e171adb65fc6d9cd5123810e00da83cea8bd03 done
+#21 naming to docker.io/library/kahoot-alternative done
+#21 DONE 0.1s

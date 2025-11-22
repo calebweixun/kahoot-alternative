@@ -1,5 +1,8 @@
 import { Participant, supabase } from '@/types/types'
 import { useQRCode } from 'next-qrcode'
+import { useEffect, useState } from 'react'
+
+import { getEnv } from '@/utils/env'
 
 export default function Lobby({
   participants: participants,
@@ -9,6 +12,14 @@ export default function Lobby({
   gameId: string
 }) {
   const { Canvas } = useQRCode()
+
+  const [origin, setOrigin] = useState('')
+
+  useEffect(() => {
+    setOrigin(window.location.origin)
+  }, [])
+
+  const baseUrl = getEnv('NEXT_PUBLIC_BASE_URL') || origin
 
   const onClickStartGame = async () => {
     const { data, error } = await supabase
@@ -27,7 +38,7 @@ export default function Lobby({
           <div className="flex justify-start flex-wrap pb-4">
             {participants.map((participant) => (
               <div
-                className="text-xl m-2 p-2 bg-green-500"
+                className="text-xl m-2 p-2 bg-blue-800 text-white rounded shadow-md"
                 key={participant.id}
               >
                 {participant.nickname}
@@ -44,15 +55,17 @@ export default function Lobby({
         </div>
         <div className="pl-4">
           {/* <img src="/qr.png" alt="QR code" /> */}
-          <Canvas
-            text={`https://kahoot-alternative.vercel.app/game/${gameId}`}
-            options={{
-              errorCorrectionLevel: 'M',
-              margin: 3,
-              scale: 4,
-              width: 400,
-            }}
-          />
+          {baseUrl && (
+            <Canvas
+              text={`${baseUrl}/game/${gameId}`}
+              options={{
+                errorCorrectionLevel: 'M',
+                margin: 3,
+                scale: 4,
+                width: 400,
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

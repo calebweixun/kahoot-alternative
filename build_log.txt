@@ -1,0 +1,147 @@
+#0 building with "orbstack" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 30B
+#1 transferring dockerfile: 1.77kB 1.2s done
+#1 DONE 1.2s
+
+#2 [internal] load metadata for docker.io/library/node:20-alpine
+#2 DONE 1.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 32B
+#3 transferring context: 137B 0.6s done
+#3 DONE 0.6s
+
+#4 [base 1/1] FROM docker.io/library/node:20-alpine@sha256:6178e78b972f79c335df281f4b7674a2d85071aae2af020ffa39f0a770265435
+#4 DONE 0.0s
+
+#5 [builder 1/4] WORKDIR /app
+#5 CACHED
+
+#6 [runner 2/8] RUN addgroup --system --gid 1001 nodejs
+#6 CACHED
+
+#7 [runner 3/8] RUN adduser --system --uid 1001 nextjs
+#7 CACHED
+
+#8 [internal] load build context
+#8 transferring context: 47.49kB done
+#8 DONE 0.0s
+
+#9 [deps 2/4] WORKDIR /app
+#9 CACHED
+
+#10 [deps 4/4] RUN   if [ -f package-lock.json ]; then npm ci;   else echo "Lockfile not found." && exit 1;   fi
+#10 CACHED
+
+#11 [deps 3/4] COPY package.json package-lock.json* ./
+#11 CACHED
+
+#12 [deps 1/4] RUN apk add --no-cache libc6-compat
+#12 CACHED
+
+#13 [builder 2/4] COPY --from=deps /app/node_modules ./node_modules
+#13 CACHED
+
+#14 [builder 3/4] COPY . .
+#14 DONE 0.1s
+
+#15 [builder 4/4] RUN npm run build
+#15 0.225 
+#15 0.225 > kahoot-alternative@0.1.0 build
+#15 0.225 > next build
+#15 0.225 
+#15 0.464 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#15 0.464 This information is used to shape Next.js' roadmap and prioritize features.
+#15 0.464 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#15 0.464 https://nextjs.org/telemetry
+#15 0.464 
+#15 0.492   ▲ Next.js 14.2.15
+#15 0.492 
+#15 0.523    Creating an optimized production build ...
+#15 2.995 Browserslist: browsers data (caniuse-lite) is 11 months old. Please run:
+#15 2.995   npx update-browserslist-db@latest
+#15 2.995   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#15 3.922 Browserslist: caniuse-lite is outdated. Please run:
+#15 3.922   npx update-browserslist-db@latest
+#15 3.922   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+#15 4.398  ✓ Compiled successfully
+#15 4.399    Linting and checking validity of types ...
+#15 5.082 
+#15 5.082 ./src/app/host/dashboard/page.tsx
+#15 5.082 56:11  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+#15 5.082 
+#15 5.082 ./src/app/host/game/[id]/quiz.tsx
+#15 5.082 94:6  Warning: React Hook useEffect has missing dependencies: 'onTimeUp' and 'participants.length'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+#15 5.082 
+#15 5.082 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+#15 5.756    Collecting page data ...
+#15 6.121    Generating static pages (0/8) ...
+#15 6.239    Generating static pages (2/8) 
+#15 6.240    Generating static pages (4/8) 
+#15 6.252 Error: supabaseUrl is required.
+#15 6.252     at new ay (/app/.next/server/chunks/730.js:1:111680)
+#15 6.252     at ab (/app/.next/server/chunks/730.js:1:115018)
+#15 6.252     at 7039 (/app/.next/server/app/host/dashboard/page.js:1:4043)
+#15 6.252     at t (/app/.next/server/webpack-runtime.js:1:128)
+#15 6.252     at 5492 (/app/.next/server/app/host/dashboard/page.js:1:2949)
+#15 6.252     at Object.t [as require] (/app/.next/server/webpack-runtime.js:1:128)
+#15 6.252     at require (/app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:16:18669)
+#15 6.252     at i (/app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88294)
+#15 6.252     at /app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98817
+#15 6.252     at /app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98904 {
+#15 6.252   digest: '3923648207'
+#15 6.252 }
+#15 6.256    Generating static pages (6/8) 
+#15 6.270 
+#15 6.270 Error occurred prerendering page "/host/dashboard". Read more: https://nextjs.org/docs/messages/prerender-error
+#15 6.270 
+#15 6.270 Error: supabaseUrl is required.
+#15 6.270     at new ay (/app/.next/server/chunks/730.js:1:111680)
+#15 6.270     at ab (/app/.next/server/chunks/730.js:1:115018)
+#15 6.270     at 7039 (/app/.next/server/app/host/dashboard/page.js:1:4043)
+#15 6.270     at t (/app/.next/server/webpack-runtime.js:1:128)
+#15 6.270     at 5492 (/app/.next/server/app/host/dashboard/page.js:1:2949)
+#15 6.270     at Object.t [as require] (/app/.next/server/webpack-runtime.js:1:128)
+#15 6.270     at require (/app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:16:18669)
+#15 6.270     at i (/app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:88294)
+#15 6.270     at /app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98817
+#15 6.270     at /app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98904
+#15 6.271  ✓ Generating static pages (8/8)
+#15 6.273 
+#15 6.273 > Export encountered errors on following paths:
+#15 6.273 	/host/dashboard/page: /host/dashboard
+#15 6.286 npm notice
+#15 6.286 npm notice New major version of npm available! 10.8.2 -> 11.6.3
+#15 6.286 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.3
+#15 6.286 npm notice To update run: npm install -g npm@11.6.3
+#15 6.286 npm notice
+#15 ERROR: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
+------
+ > [builder 4/4] RUN npm run build:
+6.270     at /app/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:98904
+6.271  ✓ Generating static pages (8/8)
+6.273 
+6.273 > Export encountered errors on following paths:
+6.273 	/host/dashboard/page: /host/dashboard
+6.286 npm notice
+6.286 npm notice New major version of npm available! 10.8.2 -> 11.6.3
+6.286 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.3
+6.286 npm notice To update run: npm install -g npm@11.6.3
+6.286 npm notice
+------
+
+ [33m3 warnings found (use docker --debug to expand):
+[0m - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 58)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 34)
+ - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 56)
+Dockerfile:28
+--------------------
+  26 |     # ENV NEXT_TELEMETRY_DISABLED 1
+  27 |     
+  28 | >>> RUN npm run build
+  29 |     
+  30 |     # Production image, copy all the files and run next
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c npm run build" did not complete successfully: exit code: 1
