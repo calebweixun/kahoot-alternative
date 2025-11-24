@@ -1,19 +1,10 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js'
 import { Database } from './supabase'
 
-import { getEnv } from '@/utils/env'
-
-let _supabase: SupabaseClient<Database> | null = null
-
-export const supabase = (() => {
-  if (!_supabase) {
-    _supabase = createClient<Database>(
-      getEnv('NEXT_PUBLIC_SUPABASE_URL') || 'https://placeholder.supabase.co',
-      getEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY') || 'placeholder'
-    )
-  }
-  return _supabase
-})()
+export const supabase = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder'
+)
 
 export type Participant = Database['public']['Tables']['participants']['Row']
 

@@ -46,13 +46,10 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/scripts ./scripts
 
-# Set the correct permission for prerender cache and public directory
+# Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
-RUN chown -R nextjs:nodejs public
-RUN chmod +x ./scripts/generate-env.sh
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
@@ -67,4 +64,4 @@ ENV PORT=3000
 # set hostname to localhost
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["/bin/sh", "-c", "./scripts/generate-env.sh && node server.js"]
+CMD ["node", "server.js"]

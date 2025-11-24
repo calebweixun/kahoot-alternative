@@ -2,8 +2,6 @@ import { Participant, supabase } from '@/types/types'
 import { useQRCode } from 'next-qrcode'
 import { useEffect, useState } from 'react'
 
-import { getEnv } from '@/utils/env'
-
 export default function Lobby({
   participants: participants,
   gameId,
@@ -19,7 +17,7 @@ export default function Lobby({
     setOrigin(window.location.origin)
   }, [])
 
-  const baseUrl = getEnv('NEXT_PUBLIC_BASE_URL') || origin
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || origin
 
   const onClickStartGame = async () => {
     const { data, error } = await supabase
